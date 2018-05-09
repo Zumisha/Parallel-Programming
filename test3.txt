@@ -1,0 +1,20 @@
+Data Cons {
+	Cons = string * string.c_cons;
+}
+
+Data Nil {
+	Nil = string * string.c_nil;
+}
+
+Scheme Concat
+{
+@ = [1].~c_nil -> [2], [2].~c_nil -> [1],
+([1].~c_cons.[1] * ([1].~c_cons.[2] * [2]).Concat).c_cons;
+}
+
+Application
+
+List1 = (1 * c_nil).c_cons;
+List2 = (2 * c_nil).c_cons;
+
+%Concat(List1, List2)
