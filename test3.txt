@@ -1,15 +1,14 @@
-Data Cons {
-	Cons = string * string.c_cons;
-}
-
-Data Nil {
-	Nil = string * string.c_nil;
+Data List['t]
+{
+   List = c_nil ++ 't * List['t].c_cons;
 }
 
 Scheme Concat
 {
-@ = [1].~c_nil -> [2], [2].~c_nil -> [1],
-([1].~c_cons.[1] * ([1].~c_cons.[2] * [2]).Concat).c_cons;
+@ = [1].~c_nil -> [2], [2].~c_nil -> [1], ([1].~c_cons.[1] * ([1].~c_cons.[2] * [2]).Concat).c_cons.print * 
+("\n").print * 
+//Эквивалентное представление
+[1].~c_nil -> [2], [2].~c_nil -> [1], ([1].~c_cons * [2]).([1] * ([2] * [3]).Concat).c_cons.print;
 }
 
 Application
