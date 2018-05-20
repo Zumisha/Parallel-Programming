@@ -1,54 +1,54 @@
-StandartLibrary::StandartLibrary() : FunctionLibrary("StdLib")
-{
-	addFunction(FPTL::Parser::BuildInFunctions::Id, &id);
+// Базовые функции.
+const char Id[]             = "id";
+const char Add[]            = "add";
+const char Subtract[]       = "sub";
+const char Multiply[]       = "mul";
+const char Divide[]         = "div";
+const char Modulus[]        = "mod";
+const char Equal[]          = "equal";
+const char NotEqual[]       = "nequal";
+const char Greater[]        = "greater";
+const char Less[]           = "less";
+const char GreaterOrEqual[] = "gequal";
+const char LessOrEqual[]    = "lequal";
 
-	// Арифметические операции.
-	addFunction(FPTL::Parser::BuildInFunctions::Add, &add);
-	addFunction(FPTL::Parser::BuildInFunctions::Subtract, &sub);
-	addFunction(FPTL::Parser::BuildInFunctions::Multiply, &mul);
-	addFunction(FPTL::Parser::BuildInFunctions::Divide, &div);
-	addFunction(FPTL::Parser::BuildInFunctions::Modulus, &mod);
-	addFunction(FPTL::Parser::BuildInFunctions::Equal, &equals);
-	addFunction(FPTL::Parser::BuildInFunctions::Less, &less);
-	addFunction(FPTL::Parser::BuildInFunctions::Greater, &greater);
-	addFunction(FPTL::Parser::BuildInFunctions::GreaterOrEqual, &greaterOrEqual);
-	addFunction(FPTL::Parser::BuildInFunctions::LessOrEqual, &lessOrEqual);
-	addFunction(FPTL::Parser::BuildInFunctions::NotEqual, &notEqual);
-	addFunction(FPTL::Parser::BuildInFunctions::Abs, &abs);
+// Матемитические функции.
+const char Sqrt[]           = "sqrt";
+const char Sin[]            = "sin";
+const char Cos[]            = "cos";
+const char Tan[]            = "tan";
+const char Asin[]           = "asin";
+const char Atan[]           = "atan";
+const char Round[]          = "round";
+const char Exp[]            = "exp";
+const char Ln[]             = "ln";
+const char Abs[]            = "abs";
+const char Pi[]             = "pi";
+const char E[]              = "E";
 
-	// Трансцендентные функции.
-	addFunction(FPTL::Parser::BuildInFunctions::Rand, &rand);
-	addFunction(FPTL::Parser::BuildInFunctions::Sqrt, &sqrt);
-	addFunction(FPTL::Parser::BuildInFunctions::Sin, &sin);
-	addFunction(FPTL::Parser::BuildInFunctions::Cos, &cos);
-	addFunction(FPTL::Parser::BuildInFunctions::Tan, &tan);
-	addFunction(FPTL::Parser::BuildInFunctions::Asin, &asin);
-	addFunction(FPTL::Parser::BuildInFunctions::Atan, &atan);
-	addFunction(FPTL::Parser::BuildInFunctions::Exp, &exp);
-	addFunction(FPTL::Parser::BuildInFunctions::Ln, &log);
-	addFunction(FPTL::Parser::BuildInFunctions::Round, &round);
-	addFunction(FPTL::Parser::BuildInFunctions::Pi, &loadPi);
-	addFunction(FPTL::Parser::BuildInFunctions::E, &loadE);
+// Функции работы со строками.
+const char Cat[]            = "cat";
+const char Search[]         = "search";
+const char Match[]          = "match";
+const char Replace[]        = "replace";
+const char GetToken[]       = "getToken";
+const char Length[]         = "length";
 
-	addFunction(FPTL::Parser::BuildInFunctions::Print, &print);
-	addFunction(FPTL::Parser::BuildInFunctions::PrintType, &printType);
+// Другие функции.
+const char Rand[]           = "rand";
+const char Print[]          = "print";
+const char PrintType[]      = "printType";
 
-	// Преобразование типов.
-	addFunction(FPTL::Parser::BuildInFunctions::toString, &toString);
-	addFunction(FPTL::Parser::BuildInFunctions::toInt, &toInteger);
-	addFunction(FPTL::Parser::BuildInFunctions::toReal, &toDouble);
+// Преобразования типов.
+const char toString[]       = "toString";
+const char toInt[]          = "toInt";
+const char toReal[]         = "toReal";
+const char toLongInt[]      = "toLongInt";
 
-	// Работа со строками.
-	addFunction(FPTL::Parser::BuildInFunctions::Cat, &concat);
-	addFunction(FPTL::Parser::BuildInFunctions::Length, &length);
-	addFunction(FPTL::Parser::BuildInFunctions::Search, &search);
-	addFunction(FPTL::Parser::BuildInFunctions::readFile, &readFile);
-	addFunction(FPTL::Parser::BuildInFunctions::Match, &match);
-	addFunction(FPTL::Parser::BuildInFunctions::Replace, &replace);
-	addFunction(FPTL::Parser::BuildInFunctions::GetToken, &getToken);
+// Операции с файлами.
+const char readFile[]       = "readFile";
 
-	// Работа с массивами.
-	addFunction(FPTL::Parser::BuildInFunctions::arrCreate, &createArray);
-	addFunction(FPTL::Parser::BuildInFunctions::arrGetElem, &getArrayElement);
-	addFunction(FPTL::Parser::BuildInFunctions::arrSetElem, &setArrayElement);
-}
+// Работа с массивами.
+const char arrCreate[]      = "arrayCreate";
+const char arrGetElem[]     = "arrayGet";
+const char arrSetElem[]     = "arraySet";
