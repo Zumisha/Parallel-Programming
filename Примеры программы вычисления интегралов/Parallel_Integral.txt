@@ -9,8 +9,16 @@ Scheme Test
 					(([1]*[1]).mul * 0.25).mul.sin).mul * 
 					([1] * 0.125).mul.sin
 				).mul;
-
 				
+	//f(x) = x*sin(x)*cos(Pi*x)
+	Func2 = ((id * id.sin).mul * (pi * id).mul.cos).mul;
+	
+	//f(x) = sin(x*x)*x*2
+	Func3 = (((((id*id).mul).sin) * id).mul * 2).mul;
+	
+	//f(x) = sin(3*x^3)*cos(2*x^2)
+	Func4 = (((([1]*[1]).mul*[1]).mul*3).mul.sin*(([1]*[1]).mul*2).mul.sin).mul;
+	
 	//Интегрирование методом трапеции.
 	//Параметры A*B*Eps*p - границы отрезка интегрирования, точность, степень параллелизма.
 	Fun Integrate[fFunction]
@@ -89,8 +97,7 @@ Scheme Test
 						).add
 					).add;
 	}
-
 }
 
 Application
-%Test(0.0 * 25.0 * 0.000000001 * 8)
+%Test(0.000001 * 25.0 * 0.000001 * 8)
