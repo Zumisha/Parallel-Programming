@@ -1,0 +1,63 @@
+Scheme Test
+{
+
+	@ = Integrate(Func).print;
+	
+	//f(x) = sin(0,5*x^3)*sin(0.25*x^2)*sin(0.125*x)
+	Func = (	(	((([1]*[1]).mul*[1]).mul * 0.5).mul.sin * 
+					(([1]*[1]).mul * 0.25).mul.sin
+				).mul * 
+					([1] * 0.125).mul.sin
+				).mul;
+
+	//f(x) = 1/(x*e^x) 
+	Func2 = (1 * ([1] * [1].exp).mul).div;
+	
+	// Параметры A*B*Eps - границы отрезка интегрирования и точность.
+	Fun Integrate[fFunction]
+	{
+		@ = ([3] * [1] * [2] * [1].fFunction * [2].fFunction).(id * ([2] * [3] * [4] * [5]).Trp).Integr;
+		
+		//Integr(Eps, a, b, f(a), f(b), Trp(ab))
+		Integr = (	id * 
+					([2] * [3]).Mid			//(Eps, a, b, f(a), f(b), Trp(ab), Mid)
+				).(	id * 
+					[7].fFunction			//(Eps, a, b, f(a), f(b), Trp(ab), Mid, f(mid))
+				).( id *
+					([2] * [7] * [4] * [8]).Trp * //(Eps, a, b, f(a), f(b), Trp(ab), Mid, f(mid),
+					([7] * [3] * [8] * [5]).Trp	  //Trp(am), Trp(mb))							
+				).(	id * 
+					([9] * [10]).add		//(Eps, a, b, f(a), f(b), Trp(ab), Mid, f(mid), 
+											//Trp(am), Trp(mb), Trp(h/2))
+				).(	(([6]*[11]).sub.abs * 3).div * 
+					id * 
+					([1] * 2).div		
+//(|Trp(h/2) - Trp(h)|, Eps, a, b, f(a), f(b), Trp(ab), Mid, f(mid), Trp(am), Trp(mb), Trp(h/2), Eps/2)
+				).(less ->						//|Trp(h/2) - Trp(h)| < Eps?
+					[12],				//Да - возвращаем Trp(h)		
+					(	(	[13] *		//Нет - возвращаем 
+							[3] * 		//Integr(Eps/2, a, mid, f(a), f(mid), Trp(am)) +
+							[8] *  		//+ Integr(Eps/2, mid, b, f(mid), f(b),Trp(mb))
+							[5] *
+							[9] *
+							[10]
+						).Integr * 		
+						(	[13] *			//Integr здесь вычисляются параллельно.
+							[8] * 			//Как следствие - неконтролируемый рост зернистости.
+							[4] *
+							[9] *
+							[6] *
+							[11]
+						).Integr					
+					).add);
+
+		Mid = (([1] * [2]).add * 2.0).div;
+
+		//Trp(a, b, f(a), f(b)) = (b-a)*(f(a)+f(b))/2
+		Trp = ((([2] * [1]).sub * ([3] * [4]).add).mul * 2.0).div;
+	}
+
+}
+
+Application
+%Test(0.0 * 25.0 * 0.000001)

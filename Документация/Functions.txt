@@ -1,54 +1,71 @@
-// Базовые функции.
-const char Id[]             = "id";
-const char Add[]            = "add";
-const char Subtract[]       = "sub";
-const char Multiply[]       = "mul";
-const char Divide[]         = "div";
-const char Modulus[]        = "mod";
-const char Equal[]          = "equal";
-const char NotEqual[]       = "nequal";
-const char Greater[]        = "greater";
-const char Less[]           = "less";
-const char GreaterOrEqual[] = "gequal";
-const char LessOrEqual[]    = "lequal";
+// Функции сравнения.
+
+([1] * [2]).equal
+([1] * [2]).nequal
+([1] * [2]).greater
+([1] * [2]).less
+([1] * [2]).gequal
+([1] * [2]).lequal
 
 // Матемитические функции.
-const char Sqrt[]           = "sqrt";
-const char Sin[]            = "sin";
-const char Cos[]            = "cos";
-const char Tan[]            = "tan";
-const char Asin[]           = "asin";
-const char Atan[]           = "atan";
-const char Round[]          = "round";
-const char Exp[]            = "exp";
-const char Ln[]             = "ln";
-const char Abs[]            = "abs";
-const char Pi[]             = "pi";
-const char E[]              = "E";
 
-// Функции работы со строками.
-const char Cat[]            = "cat";
-const char Search[]         = "search";
-const char Match[]          = "match";
-const char Replace[]        = "replace";
-const char GetToken[]       = "getToken";
-const char Length[]         = "length";
-
-// Другие функции.
-const char Rand[]           = "rand";
-const char Print[]          = "print";
-const char PrintType[]      = "printType";
+([1] * [2]).add
+([1] * [2]).sub
+([1] * [2]).mul
+([1] * [2]).div
+([1] * [2]).mod
+([1]).sqrt
+([1]).abs
+([1]).exp
+([1]).ln
+([1]).round - Математическое округление.
+([1]).sin
+([1]).cos
+([1]).tan
+([1]).asin
+([1]).atan
+pi
+E
 
 // Преобразования типов.
-const char toString[]       = "toString";
-const char toInt[]          = "toInt";
-const char toReal[]         = "toReal";
-const char toLongInt[]      = "toLongInt";
+
+([1]).toString
+([1]).toInt
+([1]).toReal
+([1]).toLongInt
+
+// Функции работы со строками.
+
+([1] * [2]).cat - Возвращает объединение строк [1] и [2].
+
+([1] * [2]).search - Поиск в строке [1] по регулярному выражению [2]. (нет примера)
+
+([1] * [2]).match - Проверка соответсвия строки [1] регулярному выражению [2]. (пример использования в Tokenizer)
+
+([1] * [2]).replace - Замена в строке [1] по регулярному выражению [2]. (нет примера)
+
+([1] * [2]).getToken - Выделение лексемы [2] с начала строки [1]. (пример использования в Parser и JSON)
+
+([1]).length - Возвращает длину строки [1].
+
+// Другие функции.
+
+id - Возвращает входной кортеж.
+
+rand -  Возвращает случайное вещественное число в диапазоне от 0 до 1.
+
+print - Выводит в консоль элемент или кортеж элементов.
+
+printType - Выводит в консоль тип элемента или кортеж типов элементов кортежа.
 
 // Операции с файлами.
-const char readFile[]       = "readFile";
+
+([1]).readFile - Считавает файл по пути [1] в строку и возвращает её.
 
 // Работа с массивами.
-const char arrCreate[]      = "arrayCreate";
-const char arrGetElem[]     = "arrayGet";
-const char arrSetElem[]     = "arraySet";
+
+([1] * [2]).arrayCreate - Создать массив из [1] элементов со значениями [2]. Возвращает массив.
+
+([1] * [2]).arrayGet - Получить элемент [2] из массива [1].
+
+([1] * [2] * [3]).arraySet - Присвоить элементу [2] значение [3] в массиве [1]. Возвращает новый массив.

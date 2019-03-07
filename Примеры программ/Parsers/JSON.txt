@@ -18,7 +18,7 @@ Data JSONValue {
 }
 
 Scheme JSONParser {
-	@ = "C:/Users/User/Desktop/FPTL/test2.txt".readFile.ParseValue.print;
+	@ = "../Arrays/Arrays.txt".readFile.ParseValue.print;
 	
 	ParseValue = Or(ParseObject, Or(ParseArray, Or(ParseStringValue, Or(ParseNumber, Or(ParseTrue, Or(ParseFalse, ParseNull))))));
 	
