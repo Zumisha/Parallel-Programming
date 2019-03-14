@@ -1,3 +1,3 @@
 @ECHO off
-fptl.exe --source-file Test.txt --num-cores 8
+fptl.exe Test.txt -n 8
 pause
