@@ -1,3 +1,3 @@
 @ECHO off
-fptl.exe --source-file Parallel_ant_Integral.txt --num-cores 4
+..\fptl.exe Parallel_ant_Integral.txt -n 8 --proactive
 pause
