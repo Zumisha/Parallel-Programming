@@ -29,25 +29,24 @@ Scheme Test
 				).(	id * 
 					([9] * [10]).add		//(Eps, a, b, f(a), f(b), Trp(ab), Mid, f(mid), 
 											//Trp(am), Trp(mb), Trp(h/2))
-				).(	(([6]*[11]).sub.abs * 3).div * 
-					id * 
+				).(	id * 
 					([1] * 2).div		
-//(|Trp(h/2) - Trp(h)|, Eps, a, b, f(a), f(b), Trp(ab), Mid, f(mid), Trp(am), Trp(mb), Trp(h/2), Eps/2)
-				).(less ->						//|Trp(h/2) - Trp(h)| < Eps?
-					[12],				//Да - возвращаем Trp(h)		
-					(	(	[13] *		//Нет - возвращаем 
-							[3] * 		//Integr(Eps/2, a, mid, f(a), f(mid), Trp(am)) +
-							[8] *  		//+ Integr(Eps/2, mid, b, f(mid), f(b),Trp(mb))
-							[5] *
-							[9] *
-							[10]
-						).Integr * 		
-						(	[13] *			//Integr здесь вычисляются параллельно.
-							[8] * 			//Как следствие - неконтролируемый рост зернистости.
+//(Eps, a, b, f(a), f(b), Trp(ab), Mid, f(mid), Trp(am), Trp(mb), Trp(h/2), Eps/2)
+				).(((([6]*[11]).sub.abs * 3).div * [1]).less ->						//|Trp(h/2) - Trp(h)| < Eps?
+					[11],				//Да - возвращаем Trp(h)		
+					(	(	[12] *		//Нет - возвращаем 
+							[2] * 		//Integr(Eps/2, a, mid, f(a), f(mid), Trp(am)) +
+							[7] *  		//+ Integr(Eps/2, mid, b, f(mid), f(b),Trp(mb))
 							[4] *
-							[9] *
-							[6] *
-							[11]
+							[8] *
+							[9]
+						).Integr * 		
+						(	[12] *			//Integr здесь вычисляются параллельно.
+							[7] * 			//Как следствие - неконтролируемый рост зернистости.
+							[3] *
+							[8] *
+							[5] *
+							[10]
 						).Integr					
 					).add);
 
