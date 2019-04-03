@@ -14,21 +14,23 @@ Scheme Test
 	Func2 = ((x * x.sin).mul * (pi * x).mul.cos).mul;
 	
 	//f(x) = sin(x*x)*x*2
-	Func3 = (((((x * x).mul).sin) * x).mul * 2).mul;
+	Func3 = (((((x * x).mul).sin) * x).mul * 2.0).mul;
 	
 	//f(x) = sin(3*x^3)*cos(2*x^2)
-	Func4 = (	(((x * x).mul * x).mul * 3).mul.sin * 
-				((x * x).mul * 2).mul.sin
+	Func4 = (	(((x * x).mul * x).mul * 3.0).mul.sin * 
+				((x * x).mul * 2.0).mul.sin
 			).mul;
+
+	//f(x) = 1/(x*e^x) 
+	Func5 = (1.0 * (x * x.exp).mul).div;	
 	
 	//Интегрирование методом трапеции.
-	//Параметры A*B*Eps*p - границы отрезка интегрирования, точность, степень параллелизма.
 	Fun Integrate[fFunction]
 	{
-		A = [1];
-		B = [2];
-		Eps = [3];
-		p = [4];
+		A = [1];	// левая граница отрезка интегрирования
+		B = [2];	// правая граница отрезка интегрирования
+		Eps = [3];	// точность
+		p = [4];	// степень параллелизма
 		
 		Eps_p = (Eps * p).div;
 		AB = (B * A).sub;
@@ -37,7 +39,7 @@ Scheme Test
 		@ = 	(A * B).greater -> 
 					((((("Ошибка: граница A больше границы B! A = " * A.toString).cat * ", B = ").cat * B.toString).cat * "\n").cat).print,
 					
-				(Eps * 0).lequal ->
+				(Eps * 0.0).lequal ->
 					(("Ошибка: точность должна задаваться положительным числом! Eps = " * Eps.toString).cat * "\n").cat.print,
 					
 				(p * 0).lequal ->
@@ -46,14 +48,14 @@ Scheme Test
 				(A * B * Eps_p * h).Paral(fFunction);
 		
 		
-		Fun Paral[fFunction]
+		Fun Paral[fFunction]	// Функция не видит fFunction из-за бага в интерпретаторе, поэтому делаем её функционалом.
 		{
 			A = [1];
 			B = [2];
 			Eps = [3];
 			h = [4];
 
-			h_2 = (h * 2).div;
+			h_2 = (h * 2.0).div;
 			A2 = (A * h).add;
 			
 			
@@ -65,7 +67,7 @@ Scheme Test
 		}
 		
 		
-		Fun Integr[fFunction]
+		Fun Integr[fFunction]	// Функция не видит fFunction из-за бага в интерпретаторе, поэтому делаем её функционалом.
 		{
 			A = [1];
 			B = [2];
@@ -79,7 +81,7 @@ Scheme Test
 			// Оптимизация: сформировали новый кортеж из входного и Trp(a, b, h/2),
 			// чтобы в дальнейшем не пересчитавать Trp(a, b, h/2) несколько раз.
 				.(	((Trp_h * Trp_2h).Runge * Eps).greater -> 
-					(A * B * Eps * (h * 2).div * Trp_h).Integr,
+					(A * B * Eps * (h * 2.0).div * Trp_h).Integr,
 						
 					Trp_h
 				);
@@ -95,18 +97,18 @@ Scheme Test
 			Trp2h = [1];
 			Trp = [2];
 			
-			@ = ((Trp * Trp2h).sub.abs * 3).div;
+			@ = ((Trp * Trp2h).sub.abs * 3.0).div;
 		}
 		
 		
 		//Trp[f(x)](a,b,h) = h * ((f(a)+f(b))/2+Sum(a+h,b-h,h))
-		Fun Trp[fFunction]	// Функция Trp не видит fFunction из-за бага в интерпретаторе, поэтому делаем её функционалом.
+		Fun Trp[fFunction]	// Функция не видит fFunction из-за бага в интерпретаторе, поэтому делаем её функционалом.
 		{	
 			A = [1];
 			B = [2];
 			h = [3];
 		
-			@ = (	(	((A.fFunction * B.fFunction).add * 2).div * 
+			@ = (	(	((A.fFunction * B.fFunction).add * 2.0).div * 
 						((A * h).add * (B * h).sub * h).Sum
 					).add * 
 					h
@@ -125,5 +127,5 @@ Application
 A = 0.000001;
 B = 25.0;
 Eps = 0.000001;
-p = 8;
+p = 1;
 %Test(A, B, Eps, p)
