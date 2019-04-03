@@ -1,3 +1,3 @@
 @ECHO off
-..\fptl.exe --source-file Uncontrollable_Integral.txt --num-cores 8
+..\fptl.exe Uncontrollable_Integral.txt -n 8
 pause
