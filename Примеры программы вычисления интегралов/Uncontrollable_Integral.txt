@@ -73,5 +73,5 @@ Scheme Test
 Application
 A = 0.000001;
 B = 25.0;
-Eps = 0.000001;
+Eps = 0.0000001;
 %Test(A, B, Eps)

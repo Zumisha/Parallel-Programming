@@ -109,13 +109,13 @@ Scheme Test
 			h = [3];
 		
 			@ = (	(	((A.fFunction * B.fFunction).add * 2.0).div * 
-						((A * h).add * (B * h).sub * h).Sum
+						((A * h).add * (B * h).sub * h).(lequal -> (A * B * h).Sum, 0)
 					).add * 
 					h
 				).mul;
 				
-			Sum = (A * B).gequal -> 
-						A.fFunction,
+			Sum = (A * B).greater -> 
+						0,
 						(	A.fFunction * 
 							((A * h).add * B * h).Sum
 						).add;
@@ -126,6 +126,6 @@ Scheme Test
 Application
 A = 0.000001;
 B = 25.0;
-Eps = 0.000001;
+Eps = 0.0000001;
 p = 1;
 %Test(A, B, Eps, p)
