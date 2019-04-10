@@ -1,8 +1,11 @@
 Scheme Factorial
-{	
-	@ = (([1] * [1].toInt).sub * 0).nequal ->
-			(("Ошибка: аргумент должен быть целым числом! x = " * [1].toString).cat * "\n").cat.print,
-			Fact.print;
+{
+	@ = ([1] * 0).gequal ->
+			((([1] * [1].toInt).sub * 0).equal ->
+				Fact.print,
+				true),
+			true
+		-> (("Ошибка: аргумент должен быть положительным целым числом! x = " * [1].toString).cat * "\n").cat.print;
 			
 	x = [1].toReal;
 	
