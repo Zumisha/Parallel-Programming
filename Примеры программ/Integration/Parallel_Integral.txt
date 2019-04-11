@@ -11,7 +11,7 @@ Scheme Test
 			).mul;
 				
 	//f(x) = x*sin(x)*cos(Pi*x)
-	Func2 = ((x * x.sin).mul * (pi * x).mul.cos).mul;
+	Func2 = ((x * x.sin).mul * (Pi * x).mul.cos).mul;
 	
 	//f(x) = sin(x*x)*x*2
 	Func3 = (((((x * x).mul).sin) * x).mul * 2.0).mul;
