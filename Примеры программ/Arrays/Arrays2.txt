@@ -3,12 +3,14 @@ Scheme Arrays
 	//@ = (5 * 1 * 0).((RandMatrix*[1]).printMatrix * [1]).MatrixNormInf.print;
 	//@ = (10000 * 1 * 0).(RandMatrix * [1]).MatrixNormInf.print;
 	//@ = (1000 * 1 * 0).(RandMatrix * [1]).MatrixMaxEl.print;
-	@ = (1000 * 1 * 0).(RandMatrix * [1]).MatrixSumEl.print;
+	//@ = (1000 * 1 * 0).(RandMatrix * [1]).MatrixSumEl.print;
 	
-	//@ = (1000000 * 1 * 0).(RandArray * [1]).ArrSum.print;
+	@ = (1000000 * 1 * 0).(RandArray * [1]).ArrSumEl.print;
 	//Sum elements of Array with 10^8 elements uses about 60-80GB RAM
 	//10^7 uses about 4GB
 	//10^6 uses about 200MB
+	
+	//@ = ((2 * 1 * 0).RandMatrix * "\n\n" * (2 * 1 * 0).RandMatrix * "\n\n" * (2 * 1 * 0).RandMatrix * "\n\n").([1] * [3] * [5] * print).arrayCat.print;
 	
 	Fun RandArray
 	{	//x = rnd(1)*k+b
@@ -56,7 +58,41 @@ Scheme Arrays
 		k = [2];
 		b = [3];
 		
-		@ = (N * (N * k * b).RandArray).arrayCreate;
+		@ = ((N * (N * 0.0).arrayCreate).arrayCreate * N * N * k * b).MatrGen;		
+		
+		Fun MatrGen
+		{
+			Arr = [1];
+			N = [2];
+			i = ([3] * 1).sub;
+			k = [4];
+			b = [5];
+			
+			@ = (i * 0).gequal -> ((Arr * i * (N * k * b).RandArray).arraySet * 
+									N * i * k * b).MatrGen,
+								Arr;
+		}
+		
+		Fun RandArray
+		{	//x = rnd(1)*k+b
+			N = [1];
+			k = [2];
+			b = [3];
+		
+			@ = ((N * 0.0).arrayCreate * N * k * b).ArrGen;
+		
+			Fun ArrGen
+			{
+				Arr = [1];
+				N = ([2] * 1).sub;
+				k = [3];
+				b = [4];
+				
+				@ = (N * 0).gequal -> ((Arr * N * ((rand * k).mul * b).add).arraySet * 
+										N * k * b).ArrGen,
+									Arr;
+			}		
+		}
 	}
 	
 	Fun printMatrix
