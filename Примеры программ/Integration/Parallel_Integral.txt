@@ -61,7 +61,7 @@ Scheme Test
 			
 			@ = (B * A).greater -> 						
 					(	(A * A2 * Eps * h_2 * (A * A2 * h).Trp(fFunction)).Integr(fFunction) * 
-						(A2 * B * Eps * h * h_2 * (A2 * h).add).Paral
+						(A2 * B * Eps * h).Paral
 					).add,					
 					0;
 		}
