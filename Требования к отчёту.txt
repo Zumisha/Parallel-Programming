@@ -17,7 +17,7 @@
 	в) Название, разрядность, версия, сборка ОС.
 	
 	г) Частота процессора во время выполнения программы.
-		CPUID HWMonitor https://www.cpuid.com/softwares/hwmonitor.html 
+		CPUID HWMonitor https://www.cpuid.com/softwares/hwmonitor.html
 		заодно можете посмотреть, не перегревается ли ваш ПК :-)
 
 7)	Версия используемого интерпретатора FPTL.

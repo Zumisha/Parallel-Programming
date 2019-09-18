@@ -1,0 +1,21 @@
+Scheme Test
+{
+	// More than 30 times faster than the old method.
+	// Comparable to c++ execution speed.
+	// (you must first generate the file)
+	
+	Size = 1024;
+	PathA = "GeneratedRandomMatrix.txt";
+	
+	@ = MatrA.((([1] * 0).arrayGet * 1023).arrayGet * (([1] * 1023).arrayGet * 1023).arrayGet).print;
+	
+	MatrA = (EmptyMatr(Size, Size) * PathA).arrayFromFile;	
+	
+    Fun EmptyMatr[n,m] 
+	{ 
+		@ = (n * ((m * 0.0).arrayCreate)).arrayCreate;
+	}
+}
+
+Application
+%Test

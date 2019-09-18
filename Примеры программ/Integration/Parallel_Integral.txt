@@ -127,5 +127,5 @@ Application
 A = 0.000001;
 B = 25.0;
 Eps = 0.0000001;
-p = 1;
+p = 8;
 %Test(A, B, Eps, p)
