@@ -1,0 +1,13 @@
+// install
+cabal update
+cabal install deepseq
+cabal install parallel
+
+// compile
+ghc -O2 -threaded -feager-blackholing --make example.hs		// В командной строке.
+:!ghc -O2 -threaded -feager-blackholing --make example.hs	// В интерпретаторе.
+// В интерпретаторе скомпилированная таким образом программа работать не будет!!!
+
+// run
+example.exe +RTS -N4
+// Выполнение с использованием 4 ядер
