@@ -1,0 +1,112 @@
+Scheme Test
+{
+	@ = Integrate(Func).print;
+
+	x = [1];
+	
+	//f(x) = sin(0.5*x^3)*sin(0.25*x^2)*sin(0.125*x)
+	Func = 	(	(	(((x * x).mul * x).mul * 0.5).mul.sin * 
+					((x * x).mul * 0.25).mul.sin).mul * 
+				(x * 0.125).mul.sin
+			).mul;
+
+	//f(x) = 1/(x*e^x) 
+	Func5 = (1.0 * (x * x.exp).mul).div;	
+	
+	//Интегрирование методом трапеции.
+	Fun Integrate[fFunction]
+	{
+		A = [1];		// левая граница отрезка интегрирования
+		B = [2];		// правая граница отрезка интегрирования
+		Eps = [3];		// точность
+		p = [4].toInt;	// степень параллелизма
+		
+		AB = (B * A).sub;
+		
+		@ = 	(A * B).greater -> 
+					((((("Ошибка: граница A больше границы B! A = " * A.toString).cat * ", B = ").cat * B.toString).cat * "\n").cat).print,
+					
+				(Eps * 0.0).lequal ->
+					(("Ошибка: точность должна задаваться положительным числом! Eps = " * Eps.toString).cat * "\n").cat.print,
+					
+				(p * 0).lequal ->
+					(("Ошибка: степень параллелизма должна задаваться положительным числом! p = " * p.toString).cat * "\n").cat.print,
+					
+				(A * B * Eps * ((AB.toReal * p).div * 2.0).div * (A * B * AB * p).Trp(fFunction) * p).Integr(fFunction);
+		
+		
+		Fun Integr[fFunction]	// Функция не видит fFunction из-за бага в интерпретаторе, поэтому делаем её функционалом.
+		{
+			A = [1];
+			B = [2];
+			Eps = [3];
+			h = [4];
+			p = [5];
+			Trp_2h = [6];
+			
+			Trp_h = [7];			
+			//По правилу Рунге для метода трапеции |Trp(h) - Trp(h/2)|/3 <= Eps
+			Runge = ((Trp_h * Trp_2h).sub.abs * 3.0).div;
+			
+			@ =	(id * (A * B * h * p).Trp(fFunction)).
+			// Оптимизация: сформировали новый кортеж из входного и Trp(a, b, h/2),
+			// чтобы в дальнейшем не пересчитавать Trp(a, b, h/2) несколько раз.
+				(	(Runge * Eps).greater -> 
+					(A * B * Eps * (h * 2.0).div * p * Trp_h).Integr,
+						
+					Trp_h
+				);
+			// Условная композиция взята в скобки, 
+			// чтобы не только условие имело доступ к предыдущему кортежу,
+			// но и ветки then и else.
+		}
+		
+		
+		//Trp[f(x)](a,b,h) = h * ((f(a)+f(b))/2+Sum(a+h,b-h,h))
+		Fun Trp[fFunction]	// Функция не видит fFunction из-за бага в интерпретаторе, поэтому делаем её функционалом.
+		{	
+			A = [1];
+			B = [2];
+			h = [3];
+			p = [4];
+			
+			A2 = (A * h).add;
+			B2 = (B * h).sub;
+			AB_p = ((B2 * A2).sub * p);
+		
+			@ = (	(	((A.fFunction * B.fFunction).add * 2.0).div * 						
+						((A * h).add * (B * h).sub * h * p).ParalSum(fFunction)
+					).add * h
+				).mul;
+			
+			Fun ParalSum[fFunction]	// Функция не видит fFunction из-за бага в интерпретаторе, поэтому делаем её функционалом.
+			{
+				A = [1];
+				B = [2];
+				h = [3];
+				AB_p = [4];	
+
+				A2 = (A * AB_p).add;
+			
+				@ = (B * A).less -> 0,
+					(B * A).equal -> A.fFunction,					
+					(	(A * A2 * h).Sum * 
+						(A2 * B * h * AB_p).ParalSum
+					).add;
+			
+				Sum = (A * B).greater -> 
+						0,
+						(	A.fFunction * 
+							((A * h).add * B * h).Sum
+						).add;
+			}
+		}
+	}
+}
+
+Application
+A = 0.000001;
+B = 25.0;
+Eps = 0.01;
+p = 8;
+%Test(A, B, Eps, p)

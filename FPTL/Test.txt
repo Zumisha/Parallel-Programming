@@ -1,0 +1,168 @@
+Scheme MatrixMultiply
+{
+//так как перемножить матрицы можно только в том случае, когда их размерности NxM И MxL то задается 3 параметра размерности
+    N = [1];
+	M = [2];
+	L = [3]; 
+	P = [4];
+	
+	Array1 = ((N*M).mul*((N*M).mul * 1).arrayCreate).FillArray(FillFn);//.(id*id.print);
+	Array2 = ((M*L).mul*((M*L).mul * 1).arrayCreate).FillArray(FillFn);//.(id*id.print);
+	
+	
+    FillFn = ([2]*[1]*[1]).arraySet;
+
+
+    Fun FillArray[F]
+    {
+        N = [1];
+        Arr = [2];
+
+        @ = (N * Arr * 0).Recurse.[1];
+
+        Recurse = ([3]*N).equal -> Arr, (N*([3]*Arr).F*([3]*1).add).Recurse;
+    }
+
+    @ = (Array1 * N * Array2 * L * M * P).matrixMul.arrayCat.print;
+
+	Fun matrixMul
+	{
+		Matr1 = [1];
+		N = [2];
+		Matr2 = [3];
+		L = [4];
+		M = [5];
+		P = [6];
+		
+		matrixMul = (Matr1 * N * M * P * Matr2 * L).createBlocksA; 
+
+		Fun createBlocksA
+		{
+			Matr1 = [1];
+			N = [2];
+			M = [3];
+			P = [4];
+			NdP = (N * P).div.toInt;
+
+            Matr2 = [5];
+            L = [6];      
+			
+			createBlocksA = (Matr1 * N * M * P * NdP * 0 * 0 * Matr2 * L).Recurse;
+			
+			Fun Recurse
+			{
+				Matr = [1];
+				N = [2];
+				M = [3];
+				P = [4];
+				NdP = [5];
+				I = [6];
+                Pe = [7];
+
+                Matr2 = [8];
+                L = [9];
+
+				Recurse = (P * (Pe*1).add).equal -> ((Matr * N * M * (((N*I).sub * M).mul * 0).arrayCreate * (N*I).sub * I).createBlockA * Matr2 * L * Pe).MullB,
+                                                    ((Matr * N * M * ((NdP*M).mul * 0).arrayCreate * NdP * I).createBlockA * Matr2 * L * Pe).MullB * (Matr * N * M * P * NdP * (I * NdP).add * (Pe*1).add * Matr2 * L).Recurse;
+			}
+			
+            //Создает блок первой матрицы вывод(Блок и кол-во элементов в нем)
+			Fun createBlockA
+			{
+				Matr = [1];
+				N = [2];
+				M = [3];
+				Block =[4];
+				L = [5]; // размер блока (кол-во строк блока на кол-во строк)
+				I = [6]; // счетчик матрицы
+				
+				createBlockA = (id*0).Recurse;
+                Fun Recurse {
+                    Matr = [1];
+                    N = [2];
+                    M = [3];
+                    Block =[4];
+                    L = [5]; // размер блока (кол-во строк блока на кол-во строк)
+                    I = [6]; // номер строки матрицы
+                    J = [7]; // счетчик блока
+
+                    Recurse = (J*(L*M).mul).equal -> Block*L*M,
+							  (Matr * N * M * (Block * J *(Matr * ((I*M).mul*J).add).arrayGet).arraySet * L * I * (J*1).add).Recurse;
+                }
+			}
+
+            Fun MullB
+            {
+                Block = [1];
+                NB = [2];
+                MB = [3];
+                Matr2 = [4];
+                L = [5];
+                Pe = [6];
+
+                MullB = (id*((NB*L).mul * 0).arrayCreate*0*0).Recurse;
+
+                Fun Recurse
+                {
+                    Block = [1];
+                    NB = [2];
+                    MB = [3];
+                    Matr2 = [4];
+                    L = [5];
+
+                    Pe = [6];
+                    Mulled = [7];
+                    I = [8];
+                    J = [9]; 
+
+                    Recurse = (I * NB).equal -> Mulled, // * NB * L,
+                                                (J * L).equal -> (Block * NB * MB * Matr2 * L * Pe * Mulled  * (I*1).add * 0).Recurse, 
+                                                                 (Block * NB * MB * Matr2 * L  * Pe * (Mulled * ((I*L).mul*J).add * (Block*NB*Matr2*L*MB*I*J*0).MulIJ).arraySet * I * (J*1).add).Recurse;
+                }
+
+                Fun MulIJ
+                {
+                    Matr1 = [1];
+                    N = [2];
+                    Matr2 = [3];
+                    L = [4];
+                    M = [5];
+                    I =[6];
+                    J =[7];
+                    K = [8];
+                   
+                    MulIJ = (K * M).equal -> 0,
+                                  (((Matr1 * N * M * I * K).matrixGetIJ * (Matr2 * M * L * K * J).matrixGetIJ).mul *
+                                    (Matr1 * N * Matr2 * L * M * I * J * (K*1).add).MulIJ
+                                  ).add;
+                }
+
+                Fun matrixGetIJ
+                {
+                    Matr = [1];
+                    N = [2];
+                    M = [3];
+                    I = [4];
+                    J = [5];
+                    
+                    matrixGetIJ = (Matr * ((M*I).mul * J).add).arrayGet;
+                }
+            
+    
+                Fun matrixSetIJ
+                {
+                    Matr = [1];
+                    N = [2];
+                    M = [3];
+                    I = [4];
+                    J = [5];
+                 
+                    matrixSetIJ = (Matr * ((M*I).mul * J).add).arraySet;
+                }
+            }
+
+		}
+	}
+}
+Application
+% MatrixMultiply(100*100*100*1)
