@@ -1,0 +1,4 @@
+Страничная память: http://komputercnulja.ru/operacionnye-sistemy/stranichnaya-organizaciya-pamyati
+PVS-Studio blog: https://www.viva64.com/ru/b/
+Professor Web, Потоки и файлы: https://professorweb.ru/my/csharp/thread_and_files/1/thread_index.php
+Regex Cross­word: https://regexcrossword.com/

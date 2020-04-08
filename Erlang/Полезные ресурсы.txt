@@ -1,0 +1,2 @@
+Learn You Some Erlang for Great Good!: https://learnyousomeerlang.com/content
+Getting Started with Erlang: https://www.jetbrains.com/help/idea/getting-started-with-erlang.html
