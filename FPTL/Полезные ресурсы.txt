@@ -1,0 +1,2 @@
+Репозиторий языка: https://github.com/Zumisha/FPTL
+Репозиторий расширения для VS Code: https://github.com/dmov/vscode-fptl-extension
